@@ -1,0 +1,6 @@
+.php_cs.cache
+clover.xml
+coveralls-upload.json
+composer.lock
+phpunit.xml
+vendor/

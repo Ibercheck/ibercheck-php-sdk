@@ -1,0 +1,38 @@
+{
+    "name": "ibercheck/ibercheck-api-sdk",
+    "description": "Ibercheck API SDK",
+    "keywords": [
+        "ibercheck"
+    ],
+    "license": "MIT",
+    "require": {
+        "guzzlehttp/psr7": "^1.0.0",
+        "php": ">= 5.5",
+        "psr/http-message": "^1.0.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "1.11.*",
+        "guzzlehttp/guzzle": "^6.0.0",
+        "phpunit/phpunit": "^4.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ibercheck\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ibercheck\\": "test/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix -v",
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-clover clover.xml"
+    }
+}
