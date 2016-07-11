@@ -71,7 +71,7 @@ function sendRequestToApi(Psr\Http\Message\RequestInterface $request) {
 
     try {
         $response = $ibercheckApiClient->sendRequest($request);
-        $payload = $ibercheckApiClient->decodeResponseBody($response);
+        $payload = $ibercheckApiClient->decodeResponseBody($response->getBody());
     } catch (Ibercheck\Api\ApiCommunicationException $apiCommunicationException) {
         // A network error has occurred while sending the request or receiving the response.
     
