@@ -17,12 +17,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Ibercheck\\": "src/"
+            "Ibercheck\\Api\\": "src/Api/",
+            "Ibercheck\\Http\\": "src/Http/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ibercheck\\": "test/"
+            "Ibercheck\\Api\\": "test/Api/",
+            "Ibercheck\\Http\\": "test/Http/"
         }
     },
     "scripts": {
