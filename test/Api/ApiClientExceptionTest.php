@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @covers Ibercheck\Api\ApiClientException
- * @covers Ibercheck\Api\ApiProblemExceptionTrait
+ * @covers Ibercheck\Api\ApiProblem\ApiProblemExceptionTrait
  */
 class ApiClientExceptionTest extends TestCase
 {
