@@ -58,13 +58,13 @@ $oAuthRequest = $oAuthRequest->withJsonSerializableData(
         'client_secret' => 's3cr3t', // Affiliate Secret
     ]
 );
-$oAuthPayload = sendRequestToApi($oAuthResponse);
+$oAuthResponsePayload = sendRequestToApi($oAuthRequest);
 
 // Use the new private access token for authenticate your API requests.
 $meRequest = new Ibercheck\Api\ApiRequest('GET', 'http://api_dev.ibercheck.net/me');
-$meRequest = $meRequest->withAuthentication($oAuthResponse->access_token);
-$mePayload = sendRequestToApi($meRequest);
-print_r(sendRequestToApi($mePayload);
+$meRequest = $meRequest->withAuthentication($oAuthResponsePayload['access_token']);
+$meResponsePayload = sendRequestToApi($meRequest);
+print_r($meResponsePayload);
 
 function sendRequestToApi(Psr\Http\Message\RequestInterface $request) {
     $ibercheckApiClient = new Ibercheck\Api\Client();
