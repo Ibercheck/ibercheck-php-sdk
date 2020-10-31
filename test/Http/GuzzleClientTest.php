@@ -3,7 +3,7 @@
 namespace Ibercheck\Http;
 
 /**
- * @covers Ibercheck\Http\GuzzleClient
+ * @covers \Ibercheck\Http\GuzzleClient
  */
 class GuzzleClientTest extends AbstractClientTestCase
 {

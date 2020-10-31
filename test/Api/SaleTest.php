@@ -5,7 +5,7 @@ namespace Ibercheck\Api;
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
- * @covers Ibercheck\Api\Sale
+ * @covers \Ibercheck\Api\Sale
  */
 class SaleTest extends TestCase
 {
@@ -14,7 +14,7 @@ class SaleTest extends TestCase
      */
     public function testCreateSaleHash($affiliateSecret, $orderNumber, $productMnemonic, $signature)
     {
-        self::assertEquals($signature, Sale::createSaleHash($affiliateSecret, $orderNumber, $productMnemonic));
+        self::assertSame($signature, Sale::createSaleHash($affiliateSecret, $orderNumber, $productMnemonic));
     }
 
     public function saleHashProvider()

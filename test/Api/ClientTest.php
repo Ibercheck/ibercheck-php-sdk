@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * @covers Ibercheck\Api\Client
+ * @covers \Ibercheck\Api\Client
  */
 class ClientTest extends TestCase
 {
@@ -125,7 +125,7 @@ class ClientTest extends TestCase
         $response = $client->sendRequest($request);
         $result = $client->decodeResponseBody((string) $response->getBody());
 
-        self::assertEquals($expectedResult, $result);
+        self::assertSame($expectedResult, $result);
     }
 
     public function validResponseProvider()

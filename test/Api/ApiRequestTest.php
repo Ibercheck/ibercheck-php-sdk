@@ -5,7 +5,7 @@ namespace Ibercheck\Api;
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
- * @covers Ibercheck\Api\ApiRequest
+ * @covers \Ibercheck\Api\ApiRequest
  */
 class ApiRequestTest extends TestCase
 {
@@ -16,7 +16,7 @@ class ApiRequestTest extends TestCase
     {
         $header = ApiRequest::createAcceptHeader($apiVersion);
 
-        self::assertEquals($expectedHeader, $header);
+        self::assertSame($expectedHeader, $header);
     }
 
     public function acceptHeaderProvider()
@@ -35,7 +35,7 @@ class ApiRequestTest extends TestCase
     {
         $header = ApiRequest::createAuthorizationHeader($accessToken);
 
-        self::assertEquals($expectedHeader, $header);
+        self::assertSame($expectedHeader, $header);
     }
 
     public function authorizationHeaderProvider()
@@ -62,6 +62,6 @@ class ApiRequestTest extends TestCase
 
         $helper = new ApiRequest('foo_method', 'foo_uri');
 
-        self::assertEquals($expectedHeaders, $helper->getHeaders(), 'getHeaders not match');
+        self::assertSame($expectedHeaders, $helper->getHeaders(), 'getHeaders not match');
     }
 }

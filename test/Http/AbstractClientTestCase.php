@@ -26,12 +26,12 @@ abstract class AbstractClientTestCase extends TestCase
         $response = $transport->send($request);
         $responseBody = json_decode((string) $response->getBody(), true);
 
-        self::assertEquals((string) $request->getUri(), $responseBody['url']);
+        self::assertSame((string) $request->getUri(), $responseBody['url']);
         self::assertArrayHasKey('X-Foo', $responseBody['headers']);
-        self::assertEquals('fooValue', $responseBody['headers']['X-Foo']);
+        self::assertSame('fooValue', $responseBody['headers']['X-Foo']);
         $body = (string) $request->getBody();
         if (!empty($body)) {
-            self::assertEquals($body, $responseBody['data']);
+            self::assertSame($body, $responseBody['data']);
         }
     }
 
