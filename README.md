@@ -38,7 +38,7 @@ if(!Ibercheck\Api\Webhook::isAuthentic(
         '{....}' // Webhook payload
     )
 ) {
-    throw new Exception('Fraudulent webhook received'); 
+    throw new Exception('Fraudulent webhook received');
 }
 ```
 
@@ -67,29 +67,30 @@ $meResponsePayload = sendRequestToApi($meRequest);
 print_r($meResponsePayload);
 
 function sendRequestToApi(Psr\Http\Message\RequestInterface $request) {
-    $ibercheckApiClient = new Ibercheck\Api\Client();
+    $psr18HttpClient = new Psr\Http\Client\ClientInterface();
+    $ibercheckApiClient = new Ibercheck\Api\Client($psr18HttpClient);
 
     try {
         $response = $ibercheckApiClient->sendRequest($request);
         $payload = $ibercheckApiClient->decodeResponseBody((string) $response->getBody());
     } catch (Ibercheck\Api\ApiCommunicationException $apiCommunicationException) {
         // A network error has occurred while sending the request or receiving the response.
-    
+
         // Retry
     } catch (Ibercheck\Api\DeserializeException $deserializationException) {
         // Nobody knows when this happen, may an HTTP Proxy on our side or on your side started to return HTML responses with errors.
-    
+
         // Retry
     } catch (Ibercheck\Api\ApiServerException $apiServerException) {
         // Our server has crashed. We promise to fix it ASAP.
-    
+
         echo 'Error code', $apiClientException->getStatus(), PHP_EOL;
         echo 'Error type', $apiClientException->getType(), PHP_EOL;
         echo 'Error message', $apiClientException->getMessage(), PHP_EOL;
         echo 'Error detail', var_export($apiClientException->getDetail(), true), PHP_EOL;
     } catch (Ibercheck\Api\ApiClientException $apiClientException) {
         // Your client has sent an invalid request. Please check your code.
-    
+
         echo 'Error code', $apiClientException->getStatus(), PHP_EOL;
         echo 'Error type', $apiClientException->getType(), PHP_EOL;
         echo 'Error message', $apiClientException->getMessage(), PHP_EOL;

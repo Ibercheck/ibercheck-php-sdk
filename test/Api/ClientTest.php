@@ -4,8 +4,8 @@ namespace Ibercheck\Api;
 
 use Closure;
 use GuzzleHttp\Psr7\Response;
-use Ibercheck\Http\ClientInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -35,13 +35,13 @@ class ClientTest extends TestCase
     {
         $apiCommunication = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willThrowException(new ApiCommunicationException());
+            $httpClient->method('sendRequest')->willThrowException(new ApiCommunicationException());
 
             return $httpClient;
         };
         $deserialization = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(200, [], '<html>'));
+            $httpClient->method('sendRequest')->willReturn(new Response(200, [], '<html>'));
 
             return $httpClient;
         };
@@ -54,19 +54,19 @@ class ClientTest extends TestCase
             ]);
 
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(400, [], $body));
+            $httpClient->method('sendRequest')->willReturn(new Response(400, [], $body));
 
             return $httpClient;
         };
         $clientExceptionWithoutBody = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(400));
+            $httpClient->method('sendRequest')->willReturn(new Response(400));
 
             return $httpClient;
         };
         $clientExceptionWithInvalidBody = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(400, [], '<html>'));
+            $httpClient->method('sendRequest')->willReturn(new Response(400, [], '<html>'));
 
             return $httpClient;
         };
@@ -80,19 +80,19 @@ class ClientTest extends TestCase
             ]);
 
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(500, [], $body));
+            $httpClient->method('sendRequest')->willReturn(new Response(500, [], $body));
 
             return $httpClient;
         };
         $serverExceptionWithoutBody = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(500));
+            $httpClient->method('sendRequest')->willReturn(new Response(500));
 
             return $httpClient;
         };
         $serverExceptionWithInvalidBody = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(500, [], '<html>'));
+            $httpClient->method('sendRequest')->willReturn(new Response(500, [], '<html>'));
 
             return $httpClient;
         };
@@ -132,14 +132,14 @@ class ClientTest extends TestCase
     {
         $jsonSchema = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(200, [], '{"foo": "baz"}'));
+            $httpClient->method('sendRequest')->willReturn(new Response(200, [], '{"foo": "baz"}'));
 
             return $httpClient;
         };
 
         $empty = function () {
             $httpClient = $this->createMock(ClientInterface::class);
-            $httpClient->method('send')->willReturn(new Response(204, []));
+            $httpClient->method('sendRequest')->willReturn(new Response(204, []));
 
             return $httpClient;
         };
