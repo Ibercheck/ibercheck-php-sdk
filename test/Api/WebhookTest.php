@@ -5,7 +5,7 @@ namespace Ibercheck\Api;
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
- * @covers Ibercheck\Api\Webhook
+ * @covers \Ibercheck\Api\Webhook
  */
 class WebhookTest extends TestCase
 {
