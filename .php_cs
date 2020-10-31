@@ -5,6 +5,7 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules(
         [
+            '@PHP73Migration' => true,
             '@PHPUnit75Migration:risky' => true,
             '@PSR2' => true,
             'array_syntax' => [
@@ -15,6 +16,7 @@ return PhpCsFixer\Config::create()
             'concat_space' => [
                 'spacing' => 'one',
             ],
+            'declare_strict_types' => true,
             'dir_constant' => true,
             'ereg_to_preg' => true,
             'general_phpdoc_annotation_remove' => [
