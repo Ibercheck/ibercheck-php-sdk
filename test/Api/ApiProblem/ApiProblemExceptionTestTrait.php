@@ -3,7 +3,7 @@
 namespace Ibercheck\Api\ApiProblem;
 
 use GuzzleHttp\Psr7\Response;
-use PHPUnit_Framework_Assert as Assert;
+use PHPUnit\Framework\Assert as Assert;
 use Psr\Http\Message\ResponseInterface;
 
 trait ApiProblemExceptionTestTrait

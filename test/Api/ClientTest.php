@@ -5,7 +5,7 @@ namespace Ibercheck\Api;
 use Closure;
 use GuzzleHttp\Psr7\Response;
 use Ibercheck\Http\ClientInterface;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -22,10 +22,10 @@ class ClientTest extends TestCase
 
         $client = new Client($httpClientCallable());
 
-        $this->setExpectedException($exception);
+        $this->expectException($exception);
 
         /** @var RequestInterface $request */
-        $request = $this->getMock(RequestInterface::class);
+        $request = $this->createMock(RequestInterface::class);
 
         $response = $client->sendRequest($request);
         $client->decodeResponseBody((string) $response->getBody());
@@ -34,13 +34,13 @@ class ClientTest extends TestCase
     public function wrongResponseProvider()
     {
         $apiCommunication = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willThrowException(new ApiCommunicationException());
 
             return $httpClient;
         };
         $deserialization = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(200, [], '<html>'));
 
             return $httpClient;
@@ -53,19 +53,19 @@ class ClientTest extends TestCase
                 'detail' => ['fooDetail'],
             ]);
 
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(400, [], $body));
 
             return $httpClient;
         };
         $clientExceptionWithoutBody = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(400));
 
             return $httpClient;
         };
         $clientExceptionWithInvalidBody = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(400, [], '<html>'));
 
             return $httpClient;
@@ -79,19 +79,19 @@ class ClientTest extends TestCase
                 'detail' => ['fooDetail'],
             ]);
 
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(500, [], $body));
 
             return $httpClient;
         };
         $serverExceptionWithoutBody = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(500));
 
             return $httpClient;
         };
         $serverExceptionWithInvalidBody = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(500, [], '<html>'));
 
             return $httpClient;
@@ -120,7 +120,7 @@ class ClientTest extends TestCase
         $client = new Client($httpClientCallable());
 
         /** @var RequestInterface $request */
-        $request = $this->getMock(RequestInterface::class);
+        $request = $this->createMock(RequestInterface::class);
 
         $response = $client->sendRequest($request);
         $result = $client->decodeResponseBody((string) $response->getBody());
@@ -131,14 +131,14 @@ class ClientTest extends TestCase
     public function validResponseProvider()
     {
         $jsonSchema = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(200, [], '{"foo": "baz"}'));
 
             return $httpClient;
         };
 
         $empty = function () {
-            $httpClient = $this->getMock(ClientInterface::class);
+            $httpClient = $this->createMock(ClientInterface::class);
             $httpClient->method('send')->willReturn(new Response(204, []));
 
             return $httpClient;
