@@ -2,11 +2,10 @@
 
 namespace Ibercheck\Api;
 
-use Ibercheck\Http\ClientInterface;
-use Ibercheck\Http\GuzzleClient;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
 /**
  * This class provides useful methods for to perform requests against Ibercheck's API.
@@ -18,12 +17,9 @@ class Client
      */
     private $httpClient;
 
-    /**
-     * @param ClientInterface|null $httpClient
-     */
-    public function __construct(ClientInterface $httpClient = null)
+    public function __construct(ClientInterface $httpClient)
     {
-        $this->httpClient = $httpClient ?: new GuzzleClient();
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -38,8 +34,8 @@ class Client
     public function sendRequest(RequestInterface $request)
     {
         try {
-            $response = $this->httpClient->send($request);
-        } catch (RuntimeException $e) {
+            $response = $this->httpClient->sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
             throw ApiCommunicationException::fromException($e);
         }
 

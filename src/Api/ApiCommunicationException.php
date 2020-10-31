@@ -10,12 +10,7 @@ use RuntimeException;
  */
 class ApiCommunicationException extends RuntimeException implements ApiExceptionInterface
 {
-    /**
-     * @param Exception $exception
-     *
-     * @return self
-     */
-    public static function fromException(Exception $exception)
+    public static function fromException(Exception $exception): self
     {
         return new self($exception->getMessage(), $exception->getCode(), $exception);
     }

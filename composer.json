@@ -6,25 +6,24 @@
     ],
     "license": "MIT",
     "require": {
-        "guzzlehttp/psr7": "^1.0.0",
         "php": ">= 7.2",
-        "psr/http-message": "^1.0.0"
+        "ext-json": "*",
+        "guzzlehttp/psr7": "^1.0",
+        "psr/http-client": "^1.0",
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.0",
-        "phpunit/phpunit": "^8.0.0"
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "psr-4": {
-            "Ibercheck\\Api\\": "src/Api/",
-            "Ibercheck\\Http\\": "src/Http/"
+            "Ibercheck\\Api\\": "src/Api/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ibercheck\\Api\\": "test/Api/",
-            "Ibercheck\\Http\\": "test/Http/"
+            "Ibercheck\\Api\\": "test/Api/"
         }
     },
     "scripts": {
