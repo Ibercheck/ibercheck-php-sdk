@@ -5,6 +5,7 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules(
         [
+            '@PHPUnit75Migration:risky' => true,
             '@PSR2' => true,
             'array_syntax' => [
                 'syntax' => 'short'

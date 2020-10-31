@@ -3,7 +3,7 @@
 namespace Ibercheck\Http;
 
 use GuzzleHttp\Psr7\Request;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 
@@ -42,7 +42,7 @@ abstract class AbstractClientTestCase extends TestCase
     {
         $transport = $this->setUpClient();
 
-        $this->setExpectedException($exceptionClass);
+        $this->expectException($exceptionClass);
 
         $transport->send($request);
     }
