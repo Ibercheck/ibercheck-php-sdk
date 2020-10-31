@@ -1,13 +1,16 @@
-sudo: false
-
 language: php
+
+os:
+  - linux
+
+dist: xenial
 
 cache:
   directories:
     - $HOME/.composer/cache
     - vendor
 
-matrix:
+jobs:
   fast_finish: true
   include:
     - php: 5.6
