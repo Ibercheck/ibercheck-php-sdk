@@ -12,12 +12,12 @@ class SaleTest extends TestCase
     /**
      * @dataProvider saleHashProvider
      */
-    public function testCreateSaleHash($affiliateSecret, $orderNumber, $productMnemonic, $signature)
+    public function testCreateSaleHash($affiliateSecret, $orderNumber, $productMnemonic, $signature): void
     {
         self::assertSame($signature, Sale::createSaleHash($affiliateSecret, $orderNumber, $productMnemonic));
     }
 
-    public function saleHashProvider()
+    public function saleHashProvider(): array
     {
         return [
             // Description => [affiliateSecret, orderNumber, productMnemonic, signature]

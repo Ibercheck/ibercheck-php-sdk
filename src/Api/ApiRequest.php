@@ -14,29 +14,17 @@ use Psr\Http\Message\UriInterface;
  */
 class ApiRequest extends Request
 {
-    const API_VERSION = 1;
-    const SDK_VERSION = '0.1.1';
+    public const API_VERSION = 1;
+    public const SDK_VERSION = '0.1.1';
 
-    /**
-     * @param string $accessToken
-     *
-     * @return string
-     */
-    public static function createAuthorizationHeader($accessToken)
+    public static function createAuthorizationHeader(string $accessToken): string
     {
         return 'Bearer ' . $accessToken;
     }
 
-    /**
-     * @param int $apiVersion
-     *
-     * @return string
-     */
-    public static function createAcceptHeader($apiVersion)
+    public static function createAcceptHeader(int $apiVersion): string
     {
-        $header = sprintf('application/vnd.ibercheck.v%d+json', $apiVersion);
-
-        return $header;
+        return sprintf('application/vnd.ibercheck.v%d+json', $apiVersion);
     }
 
     /**
@@ -46,7 +34,7 @@ class ApiRequest extends Request
      * @param string|resource|StreamInterface $body Message body.
      */
     public function __construct(
-        $method,
+        string $method,
         $uri,
         array $headers = [],
         $body = null
@@ -71,7 +59,7 @@ class ApiRequest extends Request
      *
      * @return ApiRequest
      */
-    public function withAuthentication($accessToken)
+    public function withAuthentication(string $accessToken): self
     {
         return $this->withHeader('Authorization', self::createAuthorizationHeader($accessToken));
     }
@@ -81,7 +69,7 @@ class ApiRequest extends Request
      *
      * @return ApiRequest
      */
-    public function withJsonSerializableData($data)
+    public function withJsonSerializableData($data): self
     {
         $data = json_encode($data);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -101,7 +89,7 @@ class ApiRequest extends Request
      *
      * @return ApiRequest
      */
-    public function withFile($fieldName, $fileContent, $filename = null)
+    public function withFile(string $fieldName, $fileContent, $filename = null): self
     {
         $multipartStream = new MultipartStream(
             [

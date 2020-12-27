@@ -12,12 +12,12 @@ class WebhookTest extends TestCase
     /**
      * @dataProvider webhookProvider
      */
-    public function testIsAuthentic($affiliateSecret, $webhookSignature, $webhookPayload)
+    public function testIsAuthentic($affiliateSecret, $webhookSignature, $webhookPayload): void
     {
         self::assertTrue(Webhook::isAuthentic($affiliateSecret, $webhookSignature, $webhookPayload));
     }
 
-    public function webhookProvider()
+    public function webhookProvider(): array
     {
         return [
             // Description => [affiliateSecret, webhookSignature, webhookPayload]

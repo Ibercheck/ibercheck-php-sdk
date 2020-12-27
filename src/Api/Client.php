@@ -23,15 +23,11 @@ class Client
     }
 
     /**
-     * @param RequestInterface $request
-     *
-     * @return ResponseInterface
-     *
      * @throws ApiCommunicationException if an I/O error occurs.
      * @throws ApiServerException if an I/O error occurs.
      * @throws ApiClientException if request is invalid.
      */
-    public function sendRequest(RequestInterface $request)
+    public function sendRequest(RequestInterface $request): ResponseInterface
     {
         try {
             $response = $this->httpClient->sendRequest($request);
@@ -51,13 +47,9 @@ class Client
     }
 
     /**
-     * @param string $responseBody
-     *
-     * @return array
-     *
      * @throws DeserializeException if response cannot be deserialized.
      */
-    public function decodeResponseBody($responseBody)
+    public function decodeResponseBody(string $responseBody): array
     {
         // Response body is empty for HTTP 204 and 304 status code.
         if (empty($responseBody)) {

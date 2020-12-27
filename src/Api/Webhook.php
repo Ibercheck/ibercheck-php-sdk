@@ -7,25 +7,12 @@ namespace Ibercheck\Api;
  */
 class Webhook
 {
-    /**
-     * @param string $affiliateSecret
-     * @param string $webhookSignature
-     * @param string $webhookPayload
-     *
-     * @return bool
-     */
-    public static function isAuthentic($affiliateSecret, $webhookSignature, $webhookPayload)
+    public static function isAuthentic(string $affiliateSecret, string $webhookSignature, string $webhookPayload): bool
     {
         return hash_equals(self::calculateSignatureFor($affiliateSecret, $webhookPayload), $webhookSignature);
     }
 
-    /**
-     * @param string $affiliateSecret
-     * @param string $webhookPayload
-     *
-     * @return string Sales signature
-     */
-    protected static function calculateSignatureFor($affiliateSecret, $webhookPayload)
+    protected static function calculateSignatureFor(string $affiliateSecret, string $webhookPayload): string
     {
         return hash_hmac('sha256', $webhookPayload, $affiliateSecret);
     }

@@ -16,7 +16,7 @@ trait ApiProblemExceptionTestTrait
     /**
      * @dataProvider errorResponseProvider
      */
-    public function testErrorResponseThrowException(ResponseInterface $response, $code, $type, $message, $detail)
+    public function testErrorResponseThrowException(ResponseInterface $response, $code, $type, $message, $detail): void
     {
         /** @var ApiProblemExceptionTrait $e */
         $e = call_user_func($this->fromResponseCallback(), $response);
@@ -29,7 +29,7 @@ trait ApiProblemExceptionTestTrait
         Assert::assertSame($code, $e->getCode(), 'getCode not match');
     }
 
-    public function errorResponseProvider()
+    public function errorResponseProvider(): array
     {
         $basicErrorResponse = [
             'title' => 'errorMessage',

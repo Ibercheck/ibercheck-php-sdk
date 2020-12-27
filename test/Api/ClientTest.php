@@ -16,7 +16,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider wrongResponseProvider
      */
-    public function testSendRequestThrowException(Closure $httpClientCallable, $exception)
+    public function testSendRequestThrowException(Closure $httpClientCallable, $exception): void
     {
         $httpClientCallable = $httpClientCallable->bindTo($this);
 
@@ -31,7 +31,7 @@ class ClientTest extends TestCase
         $client->decodeResponseBody((string) $response->getBody());
     }
 
-    public function wrongResponseProvider()
+    public function wrongResponseProvider(): array
     {
         $apiCommunication = function () {
             $httpClient = $this->createMock(ClientInterface::class);
@@ -113,7 +113,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider validResponseProvider
      */
-    public function testSendRequest(Closure $httpClientCallable, $expectedResult)
+    public function testSendRequest(Closure $httpClientCallable, $expectedResult): void
     {
         $httpClientCallable = $httpClientCallable->bindTo($this);
 
@@ -128,7 +128,7 @@ class ClientTest extends TestCase
         self::assertSame($expectedResult, $result);
     }
 
-    public function validResponseProvider()
+    public function validResponseProvider(): array
     {
         $jsonSchema = function () {
             $httpClient = $this->createMock(ClientInterface::class);
