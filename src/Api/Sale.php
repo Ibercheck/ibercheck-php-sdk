@@ -4,14 +4,7 @@ namespace Ibercheck\Api;
 
 class Sale
 {
-    /**
-     * @param string $affiliateSecret
-     * @param string $orderNumber
-     * @param string $productMnemonic
-     *
-     * @return string Sales signature
-     */
-    public static function createSaleHash($affiliateSecret, $orderNumber, $productMnemonic)
+    public static function createSaleHash(string $affiliateSecret, string $orderNumber, string $productMnemonic): string
     {
         return hash_hmac('sha256', 'newSale' . $orderNumber . $productMnemonic, $affiliateSecret);
     }

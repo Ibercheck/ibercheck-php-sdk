@@ -12,14 +12,14 @@ class ApiRequestTest extends TestCase
     /**
      * @dataProvider acceptHeaderProvider
      */
-    public function testCreateAcceptHeader($apiVersion, $expectedHeader)
+    public function testCreateAcceptHeader($apiVersion, $expectedHeader): void
     {
         $header = ApiRequest::createAcceptHeader($apiVersion);
 
         self::assertSame($expectedHeader, $header);
     }
 
-    public function acceptHeaderProvider()
+    public function acceptHeaderProvider(): array
     {
         return [
             // Description => [apiVersion, expectedHeader]
@@ -31,14 +31,14 @@ class ApiRequestTest extends TestCase
     /**
      * @dataProvider authorizationHeaderProvider
      */
-    public function testCreateAuthorizationHeader($accessToken, $expectedHeader)
+    public function testCreateAuthorizationHeader($accessToken, $expectedHeader): void
     {
         $header = ApiRequest::createAuthorizationHeader($accessToken);
 
         self::assertSame($expectedHeader, $header);
     }
 
-    public function authorizationHeaderProvider()
+    public function authorizationHeaderProvider(): array
     {
         return [
             // Description => [accessToken, expectedHeader]
@@ -46,7 +46,7 @@ class ApiRequestTest extends TestCase
         ];
     }
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $expectedHeaders = [
             'Accept' => [

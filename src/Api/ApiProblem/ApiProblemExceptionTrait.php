@@ -10,12 +10,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 trait ApiProblemExceptionTrait
 {
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return self
-     */
-    public static function fromResponse(ResponseInterface $response)
+    public static function fromResponse(ResponseInterface $response): self
     {
         $responseBody = (string) $response->getBody();
         if (empty($responseBody)) {
@@ -30,12 +25,7 @@ trait ApiProblemExceptionTrait
         return self::fromPayload($payload);
     }
 
-    /**
-     * @param array $payload
-     *
-     * @return self
-     */
-    public static function fromPayload(array $payload)
+    public static function fromPayload(array $payload): self
     {
         return new self($payload['status'], $payload['title'], $payload['type'], $payload['detail']);
     }
@@ -51,12 +41,9 @@ trait ApiProblemExceptionTrait
     private $detail;
 
     /**
-     * @param int $status
-     * @param string $title
-     * @param string $type
      * @param string|array $detail
      */
-    public function __construct($status, $title, $type = '', $detail = '')
+    public function __construct(int $status, string $title, string $type = '', $detail = '')
     {
         parent::__construct($title, $status);
 
@@ -64,32 +51,17 @@ trait ApiProblemExceptionTrait
         $this->detail = $detail;
     }
 
-    /**
-     * @see ApiProblemExceptionInterface::getTitle
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getMessage();
     }
 
-    /**
-     * @see ApiProblemExceptionInterface::getStatus
-     *
-     * @return int
-     */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->getCode();
     }
 
-    /**
-     * @see ApiProblemExceptionInterface::getType
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
