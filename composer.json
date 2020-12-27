@@ -6,7 +6,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">= 7.2",
+        "php": ">= 7.3",
         "ext-json": "*",
         "guzzlehttp/psr7": "^1.0",
         "psr/http-client": "^1.0",
