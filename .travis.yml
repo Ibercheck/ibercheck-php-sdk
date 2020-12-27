@@ -34,7 +34,7 @@ script:
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer test-coverage -- --colors=always; fi
   - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then composer test -- --colors=always; fi
 
-  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then composer cs-check -- --ansi; fi
+  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then PHP_CS_FIXER_IGNORE_ENV=true composer cs-check -- --ansi; fi
 
 after_script:
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then
